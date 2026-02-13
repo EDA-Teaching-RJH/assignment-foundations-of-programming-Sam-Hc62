@@ -2,7 +2,7 @@ n = ["Picard", "Riker", "Data", "Worf"]
 r = ["Captain", "Commander", "Lt. Commander", "Lieutenant"]
 d = ["Command", "Command", "Operations", "Security"]
 
-active = True
+ #unnecessary code
 
 def run_system_monolith():
     print("BOOTING SYSTEM...")
@@ -40,19 +40,22 @@ def run_system_monolith():
             
            
             n.append(new_name)
-            r.append(new_rank)
-            d.append(new_div) #appending other lists
+            r.append(new_rank) #appending other list
+            d.append(new_div) #appending other list
             print("Crew member added.")
             
         elif opt == "3":
-            rem = input("Name to remove: ")
-           
-            idx = n.index(rem)
-            n.pop(idx)
-            r.pop(idx)
-            d.pop(idx)
-            print("Removed.")
-            
+            while True:
+                rem = input("Name to remove: ")
+                try: #wrapped index remove in a try loop so typos dont crash programme 
+                    idx = n.index(rem)
+                    n.pop(idx)
+                    r.pop(idx)
+                    d.pop(idx)
+                    print("Removed.")
+                    break
+                except ValueError:
+                    print("error typing name")
         elif opt == "4":
             print("Analyzing...")
             count = 0
@@ -79,7 +82,7 @@ def run_system_monolith():
        
         if len(n) > 0:
             print("Database has entries.")
-        if len(n) == 0:
+        elif len(n) == 0: 
             print("Database empty.")
 
         
