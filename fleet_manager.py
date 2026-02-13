@@ -35,4 +35,18 @@ def main():
             divs.append(member_div)
             break
     add_member()
+    def remove_member():
+        while True:
+            y = input("ID:")
+            if y in IDs:
+                z = IDs.index(y)
+                names.pop(z)
+                ranks.pop(z)
+                divs.pop(z)
+                IDs.pop(z)
+                break
+            else:
+                print("Member not found")
+                continue
+    remove_member()
 main()
