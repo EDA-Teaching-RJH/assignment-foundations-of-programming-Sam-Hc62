@@ -143,6 +143,13 @@ def main():
         total_pay = sum(get_pay(rank) for rank in ranks)
         print(f"--------------------------------------\nTotal crew payroll: {total_pay} credits")
 
+    def count_officers():
+        f = 0
+        for rank in ranks:
+            if rank == "Captain" or rank == "Commander":
+                f = f + 1
+        print(f"--------------------------------------\nTotal officers: {f}")        
+
     def display_menu():
         user_name = input("What is your full name?...")
         print("--------------------------------------\nStudent logged in:", user_name.title())
@@ -162,6 +169,8 @@ def main():
                 filter_by_division()
             elif x == 7:
                 calculate_payroll()
+            elif x == 8:
+                count_officers()
         except ValueError:
             print("not an option, try again...")        
     display_menu()
