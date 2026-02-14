@@ -153,7 +153,7 @@ def main():
     def display_menu():
         print("--------------------------------------\nStudent logged in:", user_name.title())
         try:
-            x = int(input("--------------------------------------\n(1) Add member (2) Remove member (3) Update rank\n(4) Display roster (5) Search crew member (6) Filter by division\n(7) Calculate payroll (8) Count Officers\n--------------------------------------\nChoose an option: "))
+            x = int(input("--------------------------------------\n(1) Add member (2) Remove member (3) Update rank\n(4) Display roster (5) Search crew member (6) Filter by division\n(7) Calculate payroll (8) Count Officers (9) Exit\n--------------------------------------\nChoose an option: "))
             if x == 1:
                 add_member()
             elif x == 2:
@@ -170,6 +170,8 @@ def main():
                 calculate_payroll()
             elif x == 8:
                 count_officers()
+            elif x == 9:
+                exit()
         except ValueError:
             print("not an option, try again...")
     user_name = input("What is your full name?...")        
