@@ -1,5 +1,5 @@
 def main():
-    
+    TNG_ranks = ["Crewman","Cadet","Ensign","Lieutenant Junior Grade","Lieutenant","Lieutenant Commander","Commander","Captain","Rear Admiral","Vice Admiral","Admiral","Fleet Admiral"]
     def init_database():
         names = ["Picard", "Riker", "Worf", "Data", "Troi"]
         ranks = ["Captain", "Commander", "Lieutenant", "Lieutenant Commander", "Lieutenant Commander"]
@@ -9,15 +9,14 @@ def main():
     names, ranks, divs, IDs = init_database()
 
     def add_member():
-        TNG_ranks = ["Crewman","Cadet","Ensign","Lieutenant Junior Grade","Lieutenant","Lieutenant Commander","Commander","Captain","Rear Admiral","Vice Admiral","Admiral","Fleet Admiral"]
         while True:
             member_rank = input("Rank:")
             if member_rank not in TNG_ranks:
-                print("Not a valid rank")
+                print("Not ID_update valid rank...")
                 continue
             member_ID = input("ID:")
             if member_ID in IDs:
-                print("ID already belongs to someone")
+                print("ID already belongs to someone...")
                 continue        
             member_name = input("Name:")
             member_div = input("Division:")
@@ -29,29 +28,45 @@ def main():
 
     def remove_member():
         while True:
-            y = input("ID:")
-            if y in IDs:
-                z = IDs.index(y)
-                names.pop(z)
-                ranks.pop(z)
-                divs.pop(z)
-                IDs.pop(z)
+            ID_remove = input("ID:")
+            if ID_remove in IDs:
+                y = IDs.index(ID_remove)
+                names.pop(y)
+                ranks.pop(y)
+                divs.pop(y)
+                IDs.pop(y)
                 break
             else:
-                print("Member not found")
+                print("Member not found...")
                 continue
-
+    def update_rank():
+        while True:
+            ID_update = input("ID:")
+            if ID_update in IDs:
+                z = IDs.index(ID_update)
+                a = input("New rank:")
+                if a in TNG_ranks:
+                    ranks[z] = a
+                    break
+                else:
+                    print("Not a valid rank...")
+                    continue
+            else:
+                print("Member not found...")
+                continue
     def display_menu():
-        user_name = input("What is your full name?")
+        user_name = input("What is your full name?...")
         print("Student logged in:", user_name.title())
         try:
-            x = int(input("1: Add member\n2: Remove member\n3: Update rank\n4: Display roster\n5:Search crew member\n6: Filter by division\n7: Calculate payroll\n8: Count Officers\nChoose an option:\n"))
+            x = int(input("(1) Add member (2) Remove member (3) Update rank\n(4) Display roster (5) Search crew member (6) Filter by division\n(7) Calculate payroll (8) Count Officers\nChoose an option:\n"))
             if x == 1:
                 add_member()
             elif x == 2:
                 remove_member()
+            elif x == 3:
+                update_rank()
         except ValueError:
-            print("not an option, try again")
+            print("not an option, try again...")
     display_menu()
 
 main()
