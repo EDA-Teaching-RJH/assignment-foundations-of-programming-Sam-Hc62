@@ -1,5 +1,6 @@
 def main():
     TNG_ranks = ["Crewman","Cadet","Ensign","Lieutenant Junior Grade","Lieutenant","Lieutenant Commander","Commander","Captain","Rear Admiral","Vice Admiral","Admiral","Fleet Admiral"]
+    
     def init_database():
         names = ["Picard", "Riker", "Worf", "Data", "Troi"]
         ranks = ["Captain", "Commander", "Lieutenant", "Lieutenant Commander", "Lieutenant Commander"]
@@ -39,6 +40,7 @@ def main():
             else:
                 print("*error*\nMember not found...")
                 continue
+
     def update_rank():
         while True:
             ID_update = input("--------------------------------------\nID: ")
@@ -54,12 +56,14 @@ def main():
             else:
                 print("Member not found, try again...")
                 continue
+
     def display_roster():
         print("-"*50)
         print(f"{"names":<10} {"ranks":<20} {"divs":<10} {"IDs":<10}")
         print("-"*50)
         for i in range(len(names)):
             print(f"{names[i]:<10} {ranks[i]:<20} {divs[i]:<10} {IDs[i]:<10}")
+
     def search_crew():
         while True:
             search_choice = input("--------------------------------------\nSearch by...\n\n(1) Name (2) Rank (3) Division (4) ID\n--------------------------------------\nChoose an option: ")
@@ -103,6 +107,7 @@ def main():
                 print("Not an option, try again...")
                 continue
         print(f"--------------------------------------\n\n--- Name: {names[d]} --- Rank: {ranks[d]} --- Division: {divs[d]} --- ID: {IDs[d]} ---")
+    
     def filter_by_division():
         div_list = list(set(divs))
         print("--------------------------------------\nFilter by...\n")
@@ -121,6 +126,23 @@ def main():
                 if divs[i] == div:
                     print(f"{names[i]:<10} {ranks[i]:<20} {divs[i]:<10} {IDs[i]:<10}")
             break
+    
+    def calculate_payroll():
+        def get_pay(rank):
+            if rank in ["Captain","Rear Admiral","Vice Admiral","Admiral","Fleet Admiral"]:
+                return 200000
+            elif rank in ["Commander", "Lieutenant Commander"]:
+                return 90000
+            elif rank in ["Lieutenant","Lieutenant Junior Grade"]:
+                return 50000
+            elif rank in ["Crewman","Ensign","Cadet"]:
+                return 35000
+            else: 
+                return 30000
+
+        total_pay = sum(get_pay(rank) for rank in ranks)
+        print(f"--------------------------------------\nTotal crew payroll: {total_pay} credits")
+
     def display_menu():
         user_name = input("What is your full name?...")
         print("--------------------------------------\nStudent logged in:", user_name.title())
@@ -138,6 +160,8 @@ def main():
                 search_crew()
             elif x == 6:
                 filter_by_division()
+            elif x == 7:
+                calculate_payroll()
         except ValueError:
             print("not an option, try again...")        
     display_menu()
