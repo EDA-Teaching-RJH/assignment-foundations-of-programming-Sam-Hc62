@@ -54,6 +54,11 @@ def main():
             else:
                 print("Member not found...")
                 continue
+    def display_roster():
+        print(f"{"names":<10} {"ranks":<20} {"divs":<10} {"IDs":<10}")
+        print("-"*50)
+        for i in range(len(names)):
+            print(f"{names[i]:<10} {ranks[i]:<20} {divs[i]:<10} {IDs[i]:<10}")
     def display_menu():
         user_name = input("What is your full name?...")
         print("Student logged in:", user_name.title())
@@ -65,6 +70,8 @@ def main():
                 remove_member()
             elif x == 3:
                 update_rank()
+            elif x == 4:
+                display_roster()
         except ValueError:
             print("not an option, try again...")
     display_menu()
