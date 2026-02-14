@@ -10,16 +10,16 @@ def main():
 
     def add_member():
         while True:
-            member_rank = input("Rank:")
+            member_rank = input("--------------------------------------\nRank: ")
             if member_rank not in TNG_ranks:
-                print("Not ID_update valid rank...")
+                print("*error*\nNot a valid rank, try again...")
                 continue
-            member_ID = input("ID:")
+            member_ID = input("ID: ")
             if member_ID in IDs:
-                print("ID already belongs to someone...")
+                print("*error*\nID already belongs to someone, try again...")
                 continue        
-            member_name = input("Name:")
-            member_div = input("Division:")
+            member_name = input("Name: ")
+            member_div = input("Division: ")
             ranks.append(member_rank)
             IDs.append(member_ID)
             names.append(member_name)
@@ -28,42 +28,86 @@ def main():
 
     def remove_member():
         while True:
-            ID_remove = input("ID:")
+            ID_remove = input("--------------------------------------\nID: ")
             if ID_remove in IDs:
-                y = IDs.index(ID_remove)
-                names.pop(y)
-                ranks.pop(y)
-                divs.pop(y)
-                IDs.pop(y)
+                a = IDs.index(ID_remove)
+                names.pop(a)
+                ranks.pop(a)
+                divs.pop(a)
+                IDs.pop(a)
                 break
             else:
-                print("Member not found...")
+                print("*error*\nMember not found...")
                 continue
     def update_rank():
         while True:
-            ID_update = input("ID:")
+            ID_update = input("--------------------------------------\nID: ")
             if ID_update in IDs:
-                z = IDs.index(ID_update)
-                a = input("New rank:")
-                if a in TNG_ranks:
-                    ranks[z] = a
+                b = IDs.index(ID_update)
+                c = input("New rank: ")
+                if c in TNG_ranks:
+                    ranks[b] = c
                     break
                 else:
-                    print("Not a valid rank...")
+                    print("Not a valid rank, try again...")
                     continue
             else:
-                print("Member not found...")
+                print("Member not found, try again...")
                 continue
     def display_roster():
+        print("-"*50)
         print(f"{"names":<10} {"ranks":<20} {"divs":<10} {"IDs":<10}")
         print("-"*50)
         for i in range(len(names)):
             print(f"{names[i]:<10} {ranks[i]:<20} {divs[i]:<10} {IDs[i]:<10}")
+    def search_crew():
+        while True:
+            search_choice = input("--------------------------------------\nSearch by...\n\n(1) Name (2) Rank (3) Division (4) ID\n--------------------------------------\nChoose an option: ")
+            if not search_choice.isdigit():
+                print("not an option try again")
+                continue
+            search_choice = int(search_choice)
+            if search_choice == 1:
+                name_search = input("--------------------------------------\nName: ")
+                if name_search in names:
+                    d = names.index(name_search)
+                    break
+                else:
+                    print("Member not found, try again...")
+                    continue
+            elif search_choice == 2:
+                rank_search = input("--------------------------------------\nRank: ")
+                if rank_search in ranks:
+                    d = ranks.index(rank_search)
+                    break
+                else:
+                    print("Member not found, try again...")
+                    continue
+            elif search_choice == 3:
+                div_search = input("--------------------------------------\nDivision: ")
+                if div_search in divs:
+                    d = divs.index(div_search)
+                    break
+                else:
+                    print("Member not found, try again...")
+                    continue
+            elif search_choice == 4:
+                ID_search = input("--------------------------------------\nID: ")
+                if ID_search in IDs:
+                    d = IDs.index(ID_search)
+                    break
+                else:
+                    print("Member not found, try again...")
+                    continue
+            else:
+                print("Not an option, try again...")
+                continue
+        print(f"--------------------------------------\n\n--- Name: {names[d]} --- Rank: {ranks[d]} --- Division: {divs[d]} --- ID: {IDs[d]} ---")
     def display_menu():
         user_name = input("What is your full name?...")
-        print("Student logged in:", user_name.title())
+        print("--------------------------------------\nStudent logged in:", user_name.title())
         try:
-            x = int(input("(1) Add member (2) Remove member (3) Update rank\n(4) Display roster (5) Search crew member (6) Filter by division\n(7) Calculate payroll (8) Count Officers\nChoose an option:\n"))
+            x = int(input("--------------------------------------\n(1) Add member (2) Remove member (3) Update rank\n(4) Display roster (5) Search crew member (6) Filter by division\n(7) Calculate payroll (8) Count Officers\n--------------------------------------\nChoose an option: "))
             if x == 1:
                 add_member()
             elif x == 2:
@@ -72,8 +116,11 @@ def main():
                 update_rank()
             elif x == 4:
                 display_roster()
+            elif x == 5:
+                search_crew()
         except ValueError:
             print("not an option, try again...")
+            
     display_menu()
 
 main()
