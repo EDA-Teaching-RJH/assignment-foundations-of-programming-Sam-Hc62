@@ -103,6 +103,24 @@ def main():
                 print("Not an option, try again...")
                 continue
         print(f"--------------------------------------\n\n--- Name: {names[d]} --- Rank: {ranks[d]} --- Division: {divs[d]} --- ID: {IDs[d]} ---")
+    def filter_by_division():
+        div_list = list(set(divs))
+        print("--------------------------------------\nFilter by...\n")
+        for i, e in enumerate(div_list, start=1):
+            print(f"({i}) {e}")
+        while True:
+            filter_choice = input("--------------------------------------\nChoose an option: ")
+            if not filter_choice.isdigit() or 1 > int(filter_choice) or int(filter_choice)> len(div_list):
+                print("Not an option, try again...")
+                continue
+            div = div_list[int(filter_choice)-1]
+            print("-"*50)
+            print(f"{"names":<10} {"ranks":<20} {"divs":<10} {"IDs":<10}")
+            print("-"*50)
+            for i in range(len(divs)):
+                if divs[i] == div:
+                    print(f"{names[i]:<10} {ranks[i]:<20} {divs[i]:<10} {IDs[i]:<10}")
+            break
     def display_menu():
         user_name = input("What is your full name?...")
         print("--------------------------------------\nStudent logged in:", user_name.title())
@@ -118,9 +136,10 @@ def main():
                 display_roster()
             elif x == 5:
                 search_crew()
+            elif x == 6:
+                filter_by_division()
         except ValueError:
-            print("not an option, try again...")
-            
+            print("not an option, try again...")        
     display_menu()
 
 main()
