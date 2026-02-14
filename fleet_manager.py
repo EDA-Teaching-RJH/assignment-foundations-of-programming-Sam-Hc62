@@ -67,46 +67,43 @@ def main():
     def search_crew():
         while True:
             search_choice = input("--------------------------------------\nSearch by...\n\n(1) Name (2) Rank (3) Division (4) ID\n--------------------------------------\nChoose an option: ")
+
             if not search_choice.isdigit():
                 print("not an option try again")
                 continue
+
             search_choice = int(search_choice)
+
             if search_choice == 1:
-                name_search = input("--------------------------------------\nName: ")
-                if name_search in names:
-                    d = names.index(name_search)
-                    break
-                else:
-                    print("Member not found, try again...")
-                    continue
+                search_value = input("--------------------------------------\nName: ")
+                search_list = names
+
             elif search_choice == 2:
-                rank_search = input("--------------------------------------\nRank: ")
-                if rank_search in ranks:
-                    d = ranks.index(rank_search)
-                    break
-                else:
-                    print("Member not found, try again...")
-                    continue
+                search_value = input("--------------------------------------\nRank: ")
+                search_list = ranks
+
             elif search_choice == 3:
-                div_search = input("--------------------------------------\nDivision: ")
-                if div_search in divs:
-                    d = divs.index(div_search)
-                    break
-                else:
-                    print("Member not found, try again...")
-                    continue
+                search_value = input("--------------------------------------\nDivision: ")
+                search_list = divs
+
             elif search_choice == 4:
-                ID_search = input("--------------------------------------\nID: ")
-                if ID_search in IDs:
-                    d = IDs.index(ID_search)
-                    break
-                else:
-                    print("Member not found, try again...")
-                    continue
+                search_value = input("--------------------------------------\nID: ")
+                search_list = IDs
+
             else:
                 print("Not an option, try again...")
                 continue
-        print(f"--------------------------------------\n\n--- Name: {names[d]} --- Rank: {ranks[d]} --- Division: {divs[d]} --- ID: {IDs[d]} ---")
+            g = False
+            for i in range(len(search_list)):
+                if search_list[i] == search_value:
+                    if not g:
+                        print(f"---------------------------------------------------------\n{'Names':<10}{'Rank':<20}{'Division':<10}{'ID':<10}\n---------------------------------------------------------")
+                    print(f"{names[i]:<10}{ranks[i]:<20}{divs[i]:<10}{IDs[i]:<10}")
+                    g = True
+            if g:
+                break
+            else:
+                print("Member not found, try again...")
     
     def filter_by_division():
         div_list = list(set(divs))
